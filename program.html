@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VistaVoyage | Travel Programs</title>
+  <meta name="description" content="Explore VistaVoyage travel programs with curated routes, daily highlights, and flexible planning support." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08131f;
+      --card: rgba(12, 24, 37, 0.72);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f4f8fb;
+      --muted: rgba(244, 248, 251, 0.76);
+      --accent: #7ce0c3;
+      --accent-2: #ffb86b;
+      --accent-3: #78a8ff;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124, 224, 195, 0.18), transparent 28%),
+        radial-gradient(circle at 80% 16%, rgba(120, 168, 255, 0.2), transparent 24%),
+        radial-gradient(circle at 88% 86%, rgba(255, 184, 107, 0.16), transparent 22%),
+        linear-gradient(180deg, #06111b 0%, #0a1724 55%, #09111a 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      padding: 20px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      background: rgba(9, 17, 26, 0.62);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      display: grid;
+      place-items: center;
+      color: #062033;
+      font-family: "Fraunces", serif;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.96rem;
+      font-weight: 600;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 999px;
+      color: #06131d;
+      background: linear-gradient(135deg, var(--accent-2), #ffdca8);
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid transparent;
+      box-shadow: 0 18px 36px rgba(255, 184, 107, 0.23);
+      transition: transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 44px 0 18px;
+    }
+
+    .hero-panel {
+      min-height: 560px;
+      border-radius: 32px;
+      padding: 38px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(6, 17, 27, 0.9), rgba(6, 17, 27, 0.48), rgba(6, 17, 27, 0.22)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80") center/cover;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Fraunces", serif;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      max-width: 10ch;
+      font-size: clamp(3rem, 7vw, 5.7rem);
+      line-height: 0.95;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .hero-panel p {
+      max-width: 58ch;
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 34px;
+      max-width: 860px;
+    }
+
+    .strip-item,
+    .program-card,
+    .day,
+    .footer {
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(18px);
+    }
+
+    .strip-item {
+      padding: 18px;
+      border-radius: 18px;
+    }
+
+    .strip-item strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.25rem;
+    }
+
+    .strip-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: 34px 0 18px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2 {
+      margin: 10px 0 0;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .section-title p {
+      max-width: 58ch;
+      margin: 0;
+    }
+
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .program-card {
+      border-radius: 26px;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .program-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 224, 195, 0.24);
+    }
+
+    .program-image {
+      min-height: 230px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .program-body {
+      padding: 22px;
+    }
+
+    .program-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .program-top h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.88rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .meta span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .day {
+      border-radius: 22px;
+      padding: 20px;
+      background: rgba(13, 22, 34, 0.7);
+    }
+
+    .day strong {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      color: #08131f;
+      background: linear-gradient(135deg, var(--accent), #e4fff5);
+      margin-bottom: 16px;
+    }
+
+    .day h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .day p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(120, 168, 255, 0.15), rgba(124, 224, 195, 0.12));
+      box-shadow: var(--shadow);
+    }
+
+    .booking h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+    }
+
+    .booking p {
+      margin: 0;
+      max-width: 68ch;
+    }
+
+    .footer {
+      margin: 30px 0 24px;
+      border-radius: 30px;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      background: rgba(7, 14, 23, 0.85);
+    }
+
+    .footer strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .footer small {
+      color: rgba(244, 248, 251, 0.56);
+    }
+
+    @media (max-width: 980px) {
+      .programs,
+      .timeline,
+      .hero-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .booking {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        border-radius: 28px;
+        padding: 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 14px 18px;
+      }
+
+      .hero-panel {
+        min-height: auto;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 16vw, 4.2rem);
+      }
+
+      .programs,
+      .timeline,
+      .hero-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .footer,
+      .booking {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="index.html" aria-label="VistaVoyage home">
+          <span class="brand-mark">V</span>
+          <span>VistaVoyage</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#about">About</a>
+          <a href="index.html#gallery">Gallery</a>
+          <a class="active" href="program.html">Program</a>
+          <a href="index.html#blogs">Blogs</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+        <a class="button" href="mailto:hello@vistavoyage.travel">Plan My Trip</a>
+      </div>
+    </header>
+
+    <main class="hero">
+      <div class="container">
+        <section class="hero-panel">
+          <div>
+            <span class="eyebrow">Signature programs</span>
+            <h1>Travel plans with rhythm and room to breathe.</h1>
+            <p>
+              Choose from flexible VistaVoyage programs built around culture, coastlines, food,
+              nature, and restorative downtime. Each route pairs local insight with polished
+              logistics so every day feels easy to step into.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#programs">View Programs</a>
+              <a class="button secondary" href="#sample">Sample Itinerary</a>
+            </div>
+          </div>
+
+          <div class="hero-strip" aria-label="Program highlights">
+            <div class="strip-item">
+              <strong>4-12 days</strong>
+              <span>Flexible trip lengths</span>
+            </div>
+            <div class="strip-item">
+              <strong>Private</strong>
+              <span>Custom routes available</span>
+            </div>
+            <div class="strip-item">
+              <strong>Local</strong>
+              <span>Guides and hosts</span>
+            </div>
+            <div class="strip-item">
+              <strong>24/7</strong>
+              <span>On-trip support</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <section id="programs" class="section">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">Programs</span>
+            <h2>Pick the journey that fits your mood.</h2>
+          </div>
+          <p>
+            Start with a ready-made travel style, then adjust dates, pace, hotels, and private
+            experiences around your group.
+          </p>
+        </div>
+
+        <div class="programs">
+          <article class="program-card">
+            <div class="program-image" style="background-image: linear-gradient(180deg, rgba(4,17,27,0.08), rgba(4,17,27,0.74)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="program-body">
+              <div class="program-top">
+                <h3>Coastal Reset</h3>
+                <span class="tag">7 days</span>
+              </div>
+              <p>Slow beach mornings, boat days, seafood dinners, and boutique stays near the water.</p>
+              <div class="meta">
+                <span>Island stays</span>
+                <span>Private sailing</span>
+                <span>Wellness</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="program-card">
+            <div class="program-image" style="background-image: linear-gradient(180deg, rgba(4,17,27,0.08), rgba(4,17,27,0.74)), url('https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="program-body">
+              <div class="program-top">
+                <h3>Culture Trail</h3>
+                <span class="tag">5 days</span>
+              </div>
+              <p>Museums, markets, neighborhood walks, and guided food stops in iconic cities.</p>
+              <div class="meta">
+                <span>City guides</span>
+                <span>Food tours</span>
+                <span>Historic stays</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="program-card">
+            <div class="program-image" style="background-image: linear-gradient(180deg, rgba(4,17,27,0.08), rgba(4,17,27,0.74)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="program-body">
+              <div class="program-top">
+                <h3>Mountain Air</h3>
+                <span class="tag">8 days</span>
+              </div>
+              <p>Scenic hikes, alpine lodges, crisp viewpoints, and fireside evenings after the trail.</p>
+              <div class="meta">
+                <span>Guided hikes</span>
+                <span>View lodges</span>
+                <span>Transfers</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sample" class="section">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">Sample flow</span>
+            <h2>A balanced four-day preview.</h2>
+          </div>
+          <p>
+            Every program is tuned to your destination, but the structure stays simple: arrive,
+            discover, go deeper, and finish with one memorable final day.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="day">
+            <strong>1</strong>
+            <h3>Arrive easily</h3>
+            <p>Airport transfer, relaxed check-in, and a welcome dinner close to your stay.</p>
+          </article>
+          <article class="day">
+            <strong>2</strong>
+            <h3>Meet the place</h3>
+            <p>A guided route through landmarks, local neighborhoods, and favorite food stops.</p>
+          </article>
+          <article class="day">
+            <strong>3</strong>
+            <h3>Choose your pace</h3>
+            <p>Adventure, wellness, shopping, or a slower day shaped around your travel style.</p>
+          </article>
+          <article class="day">
+            <strong>4</strong>
+            <h3>Finish well</h3>
+            <p>A scenic final experience, flexible checkout, and transfer support for departure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container booking">
+        <div>
+          <h2>Ready to turn a program into your trip?</h2>
+          <p>
+            Send your dates, destination shortlist, group size, and travel budget. VistaVoyage will
+            shape a polished route with stays, transfers, and experiences matched to you.
+          </p>
+        </div>
+        <a class="button" href="mailto:hello@vistavoyage.travel">Request Program</a>
+      </div>
+    </section>
+
+    <footer class="container footer">
+      <div>
+        <strong>VistaVoyage</strong>
+        <small>Curated tourism experiences for modern explorers.</small>
+        <small style="display:block; margin-top:6px;">Contact: hello@vistavoyage.travel</small>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="button secondary" href="index.html">Home</a>
+        <a class="button" href="mailto:hello@vistavoyage.travel">hello@vistavoyage.travel</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
