@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>VistaVoyage | About</title>
+	<meta name="description" content="Learn more about VistaVoyage, our travel philosophy, and the experiences we design for curious explorers." />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #06111b;
+			--bg-soft: #0b1a28;
+			--card: rgba(12, 24, 37, 0.72);
+			--line: rgba(255, 255, 255, 0.12);
+			--text: #f4f8fb;
+			--muted: rgba(244, 248, 251, 0.76);
+			--accent: #7ce0c3;
+			--accent-2: #ffb86b;
+			--accent-3: #78a8ff;
+			--shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+			--radius-xl: 32px;
+			--radius-lg: 22px;
+			--radius-md: 16px;
+			--max: 1180px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Manrope", sans-serif;
+			color: var(--text);
+			background:
+				radial-gradient(circle at 12% 10%, rgba(124, 224, 195, 0.18), transparent 28%),
+				radial-gradient(circle at 78% 18%, rgba(120, 168, 255, 0.18), transparent 24%),
+				radial-gradient(circle at 88% 84%, rgba(255, 184, 107, 0.16), transparent 22%),
+				linear-gradient(180deg, #06111b 0%, #0a1724 60%, #09111a 100%);
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		body::before,
+		body::after {
+			content: "";
+			position: fixed;
+			width: 520px;
+			height: 520px;
+			border-radius: 50%;
+			filter: blur(80px);
+			opacity: 0.16;
+			pointer-events: none;
+			z-index: 0;
+			animation: float 16s ease-in-out infinite;
+		}
+
+		body::before {
+			left: -160px;
+			top: 8%;
+			background: var(--accent);
+		}
+
+		body::after {
+			right: -180px;
+			bottom: 4%;
+			background: var(--accent-2);
+			animation-delay: -7s;
+		}
+
+		@keyframes float {
+			0%,
+			100% {
+				transform: translate3d(0, 0, 0) scale(1);
+			}
+			50% {
+				transform: translate3d(0, -18px, 0) scale(1.05);
+			}
+		}
+
+		.page {
+			position: relative;
+			z-index: 1;
+		}
+
+		.container {
+			width: min(var(--max), calc(100% - 32px));
+			margin: 0 auto;
+		}
+
+		.topbar {
+			padding: 20px 0;
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			padding: 14px 18px;
+			border: 1px solid var(--line);
+			background: rgba(9, 17, 26, 0.6);
+			backdrop-filter: blur(18px);
+			border-radius: 999px;
+			box-shadow: var(--shadow);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			color: var(--text);
+			text-decoration: none;
+			font-weight: 800;
+			letter-spacing: 0.02em;
+		}
+
+		.brand-mark {
+			width: 38px;
+			height: 38px;
+			border-radius: 14px;
+			background: linear-gradient(135deg, var(--accent), var(--accent-3));
+			box-shadow: 0 10px 30px rgba(124, 224, 195, 0.3);
+			display: grid;
+			place-items: center;
+			color: #062033;
+			font-family: "Fraunces", serif;
+			font-size: 1.05rem;
+		}
+
+		.nav-links {
+			display: flex;
+			align-items: center;
+			gap: 28px;
+			flex-wrap: wrap;
+		}
+
+		.nav-links a {
+			color: var(--muted);
+			text-decoration: none;
+			font-size: 0.96rem;
+			font-weight: 600;
+			transition: color 0.2s ease, transform 0.2s ease;
+		}
+
+		.nav-links a:hover {
+			color: var(--text);
+			transform: translateY(-1px);
+		}
+
+		.nav-cta {
+			padding: 12px 18px;
+			border-radius: 999px;
+			background: linear-gradient(135deg, var(--accent), #9ef2df);
+			color: #062033;
+			text-decoration: none;
+			font-weight: 800;
+			box-shadow: 0 14px 30px rgba(124, 224, 195, 0.25);
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.nav-cta:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 18px 40px rgba(124, 224, 195, 0.32);
+		}
+
+		.hero,
+		.section,
+		.footer {
+			position: relative;
+			z-index: 1;
+		}
+
+		.hero {
+			padding: 42px 0 28px;
+		}
+
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1.08fr 0.92fr;
+			gap: 26px;
+			align-items: stretch;
+		}
+
+		.hero-copy,
+		.panel,
+		.card,
+		.footer {
+			border: 1px solid var(--line);
+			background: var(--card);
+			backdrop-filter: blur(20px);
+			box-shadow: var(--shadow);
+		}
+
+		.hero-copy {
+			border-radius: var(--radius-xl);
+			padding: 38px;
+			overflow: hidden;
+			position: relative;
+			min-height: 560px;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.07);
+			color: var(--accent);
+			font-size: 0.86rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		h1,
+		h2,
+		h3,
+		p {
+			margin-top: 0;
+		}
+
+		.hero h1 {
+			margin: 22px 0 18px;
+			font-family: "Fraunces", serif;
+			font-size: clamp(3rem, 7vw, 5.5rem);
+			line-height: 0.95;
+			letter-spacing: -0.04em;
+			max-width: 10ch;
+		}
+
+		.hero p,
+		.section p,
+		.panel p,
+		.card p,
+		.footer small {
+			color: var(--muted);
+			line-height: 1.8;
+		}
+
+		.hero p {
+			font-size: 1.05rem;
+			max-width: 60ch;
+		}
+
+		.hero-actions {
+			display: flex;
+			gap: 14px;
+			flex-wrap: wrap;
+			margin: 28px 0 30px;
+		}
+
+		.button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 15px 22px;
+			border-radius: 999px;
+			text-decoration: none;
+			font-weight: 800;
+			border: 1px solid transparent;
+			transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+		}
+
+		.button.primary {
+			color: #06131d;
+			background: linear-gradient(135deg, var(--accent-2), #ffdca8);
+			box-shadow: 0 18px 36px rgba(255, 184, 107, 0.23);
+		}
+
+		.button.secondary {
+			color: var(--text);
+			background: rgba(255, 255, 255, 0.05);
+			border-color: rgba(255, 255, 255, 0.12);
+		}
+
+		.button:hover {
+			transform: translateY(-2px);
+		}
+
+		.hero-side {
+			display: grid;
+			gap: 16px;
+		}
+
+		.visual,
+		.mini-panel,
+		.stats,
+		.card,
+		.contact-panel {
+			border-radius: var(--radius-lg);
+			overflow: hidden;
+		}
+
+		.visual {
+			min-height: 250px;
+			background:
+				linear-gradient(180deg, rgba(4, 17, 27, 0.08), rgba(4, 17, 27, 0.74)),
+				url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80") center/cover;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
+		}
+
+		.mini-panel {
+			padding: 24px;
+			border: 1px solid var(--line);
+			background: rgba(11, 20, 31, 0.74);
+			box-shadow: var(--shadow);
+		}
+
+		.mini-panel h2,
+		.section-title h2 {
+			font-family: "Fraunces", serif;
+			font-size: clamp(2rem, 4vw, 3.4rem);
+			line-height: 1;
+			letter-spacing: -0.03em;
+			margin-bottom: 14px;
+		}
+
+		.chips {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.chip {
+			padding: 9px 12px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.07);
+			color: var(--text);
+			font-size: 0.88rem;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.stats {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 12px;
+		}
+
+		.stat {
+			padding: 18px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.stat strong {
+			display: block;
+			font-size: 1.7rem;
+			margin-bottom: 6px;
+		}
+
+		.section {
+			padding: 28px 0;
+		}
+
+		.section-title {
+			display: flex;
+			justify-content: space-between;
+			gap: 20px;
+			align-items: end;
+			margin-bottom: 20px;
+		}
+
+		.section-title p {
+			max-width: 58ch;
+		}
+
+		.cards {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.card {
+			background: rgba(12, 24, 37, 0.72);
+		}
+
+		.card-body {
+			padding: 22px;
+		}
+
+		.card-top {
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: start;
+			margin-bottom: 10px;
+		}
+
+		.card-image {
+			min-height: 240px;
+			background-position: center;
+			background-size: cover;
+		}
+
+		.contact-panel {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 18px;
+			padding: 26px;
+			border: 1px solid var(--line);
+			background: linear-gradient(135deg, rgba(124, 224, 195, 0.14), rgba(120, 168, 255, 0.12));
+			box-shadow: var(--shadow);
+		}
+
+		.footer {
+			margin: 28px auto 36px;
+			padding: 22px 24px;
+			border-radius: var(--radius-lg);
+			display: flex;
+			justify-content: space-between;
+			gap: 18px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.footer strong {
+			display: block;
+			margin-bottom: 6px;
+		}
+
+		.reveal {
+			animation: rise 0.8s ease both;
+		}
+
+		.delay-1 {
+			animation-delay: 0.08s;
+		}
+
+		.delay-2 {
+			animation-delay: 0.16s;
+		}
+
+		.delay-3 {
+			animation-delay: 0.24s;
+		}
+
+		@keyframes rise {
+			from {
+				opacity: 0;
+				transform: translateY(18px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 1100px) {
+			.hero-grid,
+			.cards {
+				grid-template-columns: 1fr;
+			}
+
+			.section-title,
+			.contact-panel,
+			.footer,
+			.nav {
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			.nav-links {
+				justify-content: center;
+			}
+		}
+
+		@media (max-width: 720px) {
+			.container {
+				width: min(var(--max), calc(100% - 20px));
+			}
+
+			.hero-copy,
+			.mini-panel,
+			.card-body,
+			.contact-panel,
+			.footer {
+				padding-left: 18px;
+				padding-right: 18px;
+			}
+
+			.hero-copy {
+				padding-top: 30px;
+				padding-bottom: 30px;
+			}
+
+			.stats {
+				grid-template-columns: 1fr;
+			}
+
+			.nav-links {
+				gap: 16px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header class="topbar">
+			<div class="container nav reveal">
+				<a class="brand" href="index.html" aria-label="VistaVoyage home">
+					<span class="brand-mark">V</span>
+					<span>VistaVoyage</span>
+				</a>
+				<nav class="nav-links" aria-label="Primary">
+					<a href="#about">About</a>
+					<a href="#gallery">Gallery</a>
+					<a href="#program">Program</a>
+					<a href="#blogs">Blogs</a>
+					<a href="#contact">Contact</a>
+				</nav>
+				<a class="nav-cta" href="index.html#program">Start Planning</a>
+			</div>
+		</header>
+
+		<main id="about" class="hero">
+			<div class="container hero-grid">
+				<section class="hero-copy reveal delay-1">
+					<span class="eyebrow">About VistaVoyage</span>
+					<h1>Travel built around clarity, comfort, and wonder.</h1>
+					<p>
+						VistaVoyage designs tourism experiences for people who want beautiful places without the
+						planning noise. We focus on trips that feel intentional, well-paced, and easy to enjoy
+						from the first idea to the final day.
+					</p>
+					<div class="hero-actions">
+						<a class="button primary" href="#gallery">See the Gallery</a>
+						<a class="button secondary" href="#contact">Contact Us</a>
+					</div>
+
+					<div class="stats" aria-label="Travel highlights">
+						<div class="stat">
+							<strong>120+</strong>
+							<span>Curated destinations</span>
+						</div>
+						<div class="stat">
+							<strong>4.9/5</strong>
+							<span>Traveler satisfaction</span>
+						</div>
+						<div class="stat">
+							<strong>24/7</strong>
+							<span>Trip support</span>
+						</div>
+					</div>
+				</section>
+
+				<aside class="hero-side reveal delay-2">
+					<div class="visual" role="img" aria-label="Mountain and ocean travel scene"></div>
+					<div class="mini-panel">
+						<h2>We keep the experience human.</h2>
+						<p>
+							Every itinerary balances local discovery with enough breathing room to enjoy the
+							trip instead of racing through it.
+						</p>
+						<div class="chips" aria-label="Popular trip styles">
+							<span class="chip">Beach escapes</span>
+							<span class="chip">City breaks</span>
+							<span class="chip">Mountain trails</span>
+							<span class="chip">Wellness retreats</span>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</main>
+
+		<section id="gallery" class="section">
+			<div class="container">
+				<div class="section-title reveal delay-1">
+					<div>
+						<span class="eyebrow">Gallery</span>
+						<h2>Places that shape memorable trips.</h2>
+					</div>
+					<p>
+						A small preview of the destinations and experiences we build around for different
+						travel styles.
+					</p>
+				</div>
+
+				<div class="cards">
+					<article class="card reveal delay-1">
+						<div class="card-image" style="background-image: linear-gradient(180deg, rgba(4,17,27,0.08), rgba(4,17,27,0.74)), url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80');"></div>
+						<div class="card-body">
+							<div class="card-top">
+								<h3>Coastal weekends</h3>
+								<span class="eyebrow">Relax</span>
+							</div>
+							<p>Slow mornings, sea views, and a route built for quiet rest and long walks.</p>
+						</div>
+					</article>
+
+					<article class="card reveal delay-2">
+						<div class="card-image" style="background-image: linear-gradient(180deg, rgba(4,17,27,0.08), rgba(4,17,27,0.74)), url('https://images.unsplash.com/photo-1518684079-5f4b3f0c4e9c?auto=format&fit=crop&w=1200&q=80');"></div>
+						<div class="card-body">
+							<div class="card-top">
+								<h3>Culture-led city stays</h3>
+								<span class="eyebrow">Explore</span>
+							</div>
+							<p>Gallery visits, markets, food trails, and neighborhoods worth wandering twice.</p>
+						</div>
+					</article>
+
+					<article class="card reveal delay-3">
+						<div class="card-image" style="background-image: linear-gradient(180deg, rgba(4,17,27,0.08), rgba(4,17,27,0.74)), url('https://images.unsplash.com/photo-1484318571209-661cf29a69c3?auto=format&fit=crop&w=1200&q=80');"></div>
+						<div class="card-body">
+							<div class="card-top">
+								<h3>Nature escapes</h3>
+								<span class="eyebrow">Reset</span>
+							</div>
+							<p>Forest lodges, mountain viewpoints, and slower itineraries with room to breathe.</p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section id="program" class="section">
+			<div class="container">
+				<div class="section-title reveal delay-1">
+					<div>
+						<span class="eyebrow">Program</span>
+						<h2>How the trip design process works.</h2>
+					</div>
+					<p>
+						Our process is simple: understand the trip, shape the route, and keep the logistics out
+						of your way.
+					</p>
+				</div>
+
+				<div class="cards">
+					<article class="card reveal delay-1">
+						<div class="card-body">
+							<span class="eyebrow">01</span>
+							<h3>Share your style</h3>
+							<p>Tell us what you like, how you travel, and the pace you want for the journey.</p>
+						</div>
+					</article>
+
+					<article class="card reveal delay-2">
+						<div class="card-body">
+							<span class="eyebrow">02</span>
+							<h3>We shape the itinerary</h3>
+							<p>We match destinations, stays, and experiences to your dates and budget.</p>
+						</div>
+					</article>
+
+					<article class="card reveal delay-3">
+						<div class="card-body">
+							<span class="eyebrow">03</span>
+							<h3>Travel with ease</h3>
+							<p>You get a practical plan that leaves more time for the actual trip.</p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section id="blogs" class="section">
+			<div class="container">
+				<div class="section-title reveal delay-1">
+					<div>
+						<span class="eyebrow">Blogs</span>
+						<h2>Useful notes before you book.</h2>
+					</div>
+					<p>
+						Short reads for planning, packing, and choosing the right kind of trip for the season.
+					</p>
+				</div>
+
+				<div class="cards">
+					<article class="card reveal delay-1">
+						<div class="card-body">
+							<span class="eyebrow">Guide</span>
+							<h3>Planning a balanced 7-day itinerary</h3>
+							<p>Keep each day focused so the trip feels rich without becoming exhausting.</p>
+						</div>
+					</article>
+
+					<article class="card reveal delay-2">
+						<div class="card-body">
+							<span class="eyebrow">Tips</span>
+							<h3>How to choose the best season</h3>
+							<p>Weather, crowds, and local events all change the feel of a destination.</p>
+						</div>
+					</article>
+
+					<article class="card reveal delay-3">
+						<div class="card-body">
+							<span class="eyebrow">Packing</span>
+							<h3>What to bring for multi-stop travel</h3>
+							<p>Pack light, stay flexible, and leave room for things you discover along the way.</p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section id="contact" class="section">
+			<div class="container">
+				<div class="contact-panel reveal delay-1">
+					<div>
+						<span class="eyebrow">Contact</span>
+						<h2 style="font-family:'Fraunces', serif; font-size: clamp(2rem, 4vw, 3rem); line-height:1; margin-bottom: 12px;">Want help shaping your next trip?</h2>
+						<p style="max-width: 56ch; margin-bottom: 0;">
+							Send your dates, destination ideas, and preferred pace. We will reply with a travel
+							direction that fits what you want to do.
+						</p>
+					</div>
+					<div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;">
+						<a class="button secondary" href="index.html">Back to Home</a>
+						<a class="button primary" href="mailto:hello@vistavoyage.travel">hello@vistavoyage.travel</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer class="container footer reveal delay-2">
+			<div>
+				<strong>VistaVoyage</strong>
+				<small>Curated tourism experiences for modern explorers.</small>
+			</div>
+			<div style="display:flex; gap:14px; flex-wrap:wrap;">
+				<a class="button secondary" href="#about">Back to top</a>
+				<a class="button primary" href="index.html#program">View Program</a>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>
